@@ -337,6 +337,7 @@ static void startPitchShift(void) {
 static void stopPitchShift(void) {
   TIMSK1 &= ~_BV(TOIE1); // Stop playback interrupt
   ADCSRA  = adc_save;    // Restore ADC control/status reg (interrupt off)
+  (void)analogRead(1);   // Discard first ADC reading (auto-trigger residue)
 }
 
 //-------------------------------------------------------------------------
